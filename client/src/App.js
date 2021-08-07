@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ApolloProvider } from '@apollo/react-hooks';
+// import { setContext } from '@apollo/react-hooks/link/context';
 import ApolloClient from 'apollo-boost';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -16,7 +17,32 @@ import Signup from './pages/Signup';
 
 
 
+// const client = new ApolloClient({
+//   // uri: '/graphql'
+//   link: authLink.concat(httpLink),
+//   cache: new InMemoryCache(),
+// });
+
+// const authLink = setContext((_, { headers }) => {
+//   const token = localStorage.getItem('id_token');
+//   return {
+//     headers: {
+//       ...headers,
+//       authorization: token ? `Bearer ${token}` : '',
+//     },
+//   };
+// });
+
 const client = new ApolloClient({
+  request: operation => {
+    const token = localStorage.getItem('id_token');
+
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : ''
+      }
+    });
+  },
   uri: '/graphql'
 });
 
