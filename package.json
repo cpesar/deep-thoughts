@@ -9,7 +9,6 @@
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build"
-   
   },
   "repository": {
     "type": "git",
@@ -25,5 +24,8 @@
   "devDependencies": {
     "concurrently": "^6.2.0",
     "gh-pages": "^3.2.3"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.4.5"
   }
 }
